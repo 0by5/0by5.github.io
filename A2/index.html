@@ -10,23 +10,26 @@ margin: 20px;
 </style>
 </head>
 <body>
-<h1>Assignment 1: Perspective and Image Pyramids</h1>
+<h1>Assignment 1: Fun with Filters and Frequencies</h1>
 <a href="../index.html">Return</a>
 <br>
-<h2>Perspective of Cameras</h2>
-<p>Shooting from different positions yields vastly different results. Even with magnification or zooming, the distortion caused by the difference in relative distances cannot be eliminated. Specifically, when the camera is too close, the distance gap between objects at different positions is accentuated; for instance, if objects A and B are 1m and 2m from the lens, moving the camera 10m further away changes their distances to approximately 11m and 12m. While the absolute difference remains similar, the ratio approaches 1, resulting in a relatively flattened image.</p>
-<div class="simple-row">
-  <img src="./images/A1.png" width="250">
-  <img src="./images/A2.png" width="200">
-</div>
-<div class="simple-row">
-  <img src="./images/B1.jpg" width="100">
-  <img src="./images/B1.jpg" width="100">
-</div>
-<p>This effect is also used in cinematic visual effects; zooming allows the edges of the image to be stretched, thereby highlighting the central object.</p>
-<img src="./images/D.gif">
+<h2>Part 1</h2>
+<p>1. Convolution is an approach in which a convolution kernel slides over an image: at each position, the kernel is multiplied by the corresponding region of image pixels, and the resulting products are summed to obtain the corresponding output value.</p>
+<p>By using convolution, we can blur the image, find boundaries and extract more features. For example, here are some outputs of convolution.</p>
+<img src="./result_images/1_1.png">
+<p>2. We can also compute and show the gradient magnitude image.</p>
+<img src="./result_images/1_2.png">
+<p>3. The results with just the difference operator were rather noisy, but we can use the Gaussian filter G. As shown below, there is less noise.</p>
+<img src="./result_images/1_3.png">
+<p>We can also do the same thing with a single convolution instead of two by creating a derivative of gaussian filters, the result is the same.</p>
+<img src="./result_images/1_4.png">
+<p>We can even visualize gradients with HSV color space.</p>
+<img src="./result_images/1_5.png">
 <br>
-<h2>Aligning using Image Pyramids</h2>
+<br>
+
+  
+<h2>Part 2</h2>
 
 <p>To produce a color image with only digitized Prokudin-Gorskii glass plate images, we need to use NCC to align. However, since an exhaustive pixel-by-pixel comparison is required, the code takes a long time to execute with large images. To address this, we use an image pyramid to generate a downscaled version (half the original size); we use this smaller image for coarse localization and then switch to the original image for fine-tuning.</p>
 <p>Since the input consists of a single file containing three image channels, cropping might leave white borders; to prevent edge artifacts from affecting the NCC calculation, I performed a slight crop to ensure that only the central, valid region is used for alignment.</p>
