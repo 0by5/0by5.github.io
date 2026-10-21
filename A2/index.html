@@ -31,16 +31,19 @@ margin: 20px;
   
 <h2>Part 2</h2>
 
-<p>To produce a color image with only digitized Prokudin-Gorskii glass plate images, we need to use NCC to align. However, since an exhaustive pixel-by-pixel comparison is required, the code takes a long time to execute with large images. To address this, we use an image pyramid to generate a downscaled version (half the original size); we use this smaller image for coarse localization and then switch to the original image for fine-tuning.</p>
-<p>Since the input consists of a single file containing three image channels, cropping might leave white borders; to prevent edge artifacts from affecting the NCC calculation, I performed a slight crop to ensure that only the central, valid region is used for alignment.</p>
+<p>1. There are more things we can do with convolution. For example, we may use a Gaussian filter to retain only the low frequencies, then subtract the blurred version from the original image to get the high frequencies of the image.</p>
+<img src="./result_images/2_1.png">
+<img src="./result_images/2_2.png">
+<p>2. We may create hybrid images using the approach described in the SIGGRAPH 2006 paper by Oliva, Torralba, and Schyns, which is to combine high-frequency images and low-frequency images.</p>
+<img src="./result_images/2_3.png">
+<img src="./result_images/2_4.png">
+<p>3. We will implement Gaussian and Laplacian stacks as mentioned in the 1983 paper by Burt and Adelson, which will be used later for blending images.</p>
+<img src="./result_images/2_5.png">
+<p>4. Now we can blend 2 images together with a vertical or horizontal seam. Here are 3 examples. The first and second images are the original images. The last image is the final result.</p>
+<img src="./result_images/2_6.png">
+<img src="./result_images/2_7.png">
+<img src="./result_images/2_8.png">
 
-<br>
-<p>After improvement, each image takes no longer than 2 minutes! As pyramids work, single-scale should also work.</p>
-<div class="simple-row">
-<img src="./images/E1.png" width="400">
-<img src="./images/E2.png" width="400">
-<img src="./images/E3.png" width="400">
-</div>
 
 </body>
 </html>
