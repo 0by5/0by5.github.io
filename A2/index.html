@@ -17,8 +17,10 @@ margin: 20px;
 <p>1. Convolution is an approach in which a convolution kernel slides over an image: at each position, the kernel is multiplied by the corresponding region of image pixels, and the resulting products are summed to obtain the corresponding output value.</p>
 <p>By using convolution, we can blur the image, find boundaries and extract more features. For example, here are some outputs of convolution.</p>
 <img src="./result_images/1_1.png">
+<br>
 <p>2. We can also compute and show the gradient magnitude image.</p>
 <img src="./result_images/1_2.png">
+<br>
 <p>3. The results with just the difference operator were rather noisy, but we can use the Gaussian filter G. As shown below, there is less noise.</p>
 <img src="./result_images/1_3.png">
 <p>We can also do the same thing with a single convolution instead of two by creating a derivative of gaussian filters, the result is the same.</p>
@@ -34,11 +36,14 @@ margin: 20px;
 <p>1. There are more things we can do with convolution. For example, we may use a Gaussian filter to retain only the low frequencies, then subtract the blurred version from the original image to get the high frequencies of the image.</p>
 <img src="./result_images/2_1.png">
 <img src="./result_images/2_2.png">
+<br>
 <p>2. We may create hybrid images using the approach described in the SIGGRAPH 2006 paper by Oliva, Torralba, and Schyns, which is to combine high-frequency images and low-frequency images.</p>
 <img src="./result_images/2_3.png">
 <img src="./result_images/2_4.png">
+<br>
 <p>3. We will implement Gaussian and Laplacian stacks as mentioned in the 1983 paper by Burt and Adelson, which will be used later for blending images.</p>
 <img src="./result_images/2_5.png">
+<br>
 <p>4. Now we can blend 2 images together with a vertical or horizontal seam. Here are 3 examples. The first and second images are the original images. The last image is the final result.</p>
 <img src="./result_images/2_6.png">
 <img src="./result_images/2_7.png">
