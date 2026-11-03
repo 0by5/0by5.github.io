@@ -1,1 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>A3</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+margin: 20px;
+}
+</style>
+</head>
+<body>
+<h1>Assignment 3: [Auto] Stitching Photo Mosaics</h1>
+<a href="../index.html">Return</a>
+<br>
+<h2>PART 1: IMAGE WARPING and MOSAICING</h2>
+<p>1. In order to blend images, we will need to find photographs that the transforms between them are projective. For example:</p>
+<img src="./web_images/w1.png">
+<br>
+<p>2. First we need to write a method to find the homographies matrix based on corresponding points. The matrix will be used to warp the images in the next step. Implementation of computeH() can be found in code.ipynb, with an example of calculation of H matrix required to rectify a window captured at an oblique angle:</p>
+<img src="./web_images/w2.png">
+<br>
+<p>3. We can now use this homography to warp each image towards the reference image, using either NearestNeighbor or Bilinear.</p>
+<p>I use pixspy.com to mark the 4 vertices of the objects (the window and the paper bag in the following 2 examples) and reorient them so they are facing the camera.</p>
+<img src="./web_images/w3.png">
+<img src="./web_images/w4.png">
+<br>
+<p>I tried to turn the paper bag into a rectangle in the second example, so it has a very large range of stretch and pushes the rectangle paper bag to the edge.</p>
+<p>We can also see that images using Bilinear appear smoother and more natural, so we will use Bilinear for the rest of this assignment.</p>
+<br>
+<p>4. Now we have everything to blend 2 images. Note that images cannot be aligned well if all the points are concentrated in one place.</p>
+<img src="./web_images/w5.png">
+<img src="./web_images/w6.png">
+<img src="./web_images/w7.png">
+<br>
+<br>
 
+<h2>PART 2: FEATURE MATCHING for AUTOSTITCHING</h2>
+<p>1. Marking points manually can be a hassle, so let’s automate it. First we need to implement Harris Interest Point Detector and ANMS. We can see that harris.get_harris_corners can only scan the entire image to identify all potential corner points, so we need to apply ANMS for downsampling.</p>
+<img src="./web_images/w8.png">
+<br>
+<p>2. The next step is to implement Feature Descriptor extraction and extract normalized 8x8 feature descriptors as the following:</p>
+<img src="./web_images/w9.png">
+<p>3. Now we need to find pairs that are potential good matches.</p>
+<img src="./web_images/w10.png">
+<p>4. We can see many matches, but a large amount of erroneous data still exists, so it is time to use RANSAC.</p>
+<img src="./web_images/w11.png">
+<p>The matching points are perfect. We can finally blend images automatically.</p>
+<img src="./web_images/w12.png">
+<img src="./web_images/w13.png">
+<img src="./web_images/w14.png">
+
+</body>
+</html>
